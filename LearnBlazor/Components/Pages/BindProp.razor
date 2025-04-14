@@ -1,0 +1,131 @@
+﻿@page "/BindProp"
+@using Models
+<div class="row">
+
+
+    <div class="col-6 border p-3">
+        <h3> Product Playground </h3>
+        IsActive -
+        <input type="checkbox" @bind="@product.IsActive" />
+        <br />
+        Enter Name -
+        <input @bind="@product.Name" @bind:event="oninput"></input>
+        <br />Enter Price -
+        <input type="number" @bind-value="@product.Price" @bind-value:event="oninput"></input>
+        <br />
+        Select proprty :
+        <select @bind="selectedProp">
+            @foreach (var prop in product.prodProperties)
+            {
+                <option value="@prop.Key">@prop.Key</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-6 border p-3">
+        <h3> Product Summary </h3>
+        Name - @product.Name
+        <br />
+        Is Active - @product.IsActive
+        <br />
+        Price - @product.Price
+        <br />
+        Selected Prop : @selectedProp
+        <br />
+        Selected Value : @product.prodProperties.FirstOrDefault(x => x.Key == selectedProp)?.Value
+        <br />
+    </div>
+</div>
+<div class="col-12 p-4">
+    <h2 class="text-success">Product Table </h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Is Active</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in ProductList)
+            {
+                <tr>
+                    <td> <input @bind="prod.Name" @bind:event="oninput" /> </td>
+                    <td> <input @bind="prod.Price" @bind:event="oninput" /> </td>
+                    <td> <input type="checkbox" @bind="prod.IsActive"  /> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="col-12 p-4">
+    <h2 class="text-success">Product Summary </h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Is Active</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in ProductList)
+            {
+                <tr>
+                    <td> @prod.Name </td>
+                    <td> @prod.Price</td>
+                    <td> @(prod.IsActive ? "Active":"In Active") </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private string selectedProp = "";
+    List<Product> ProductList = new();
+
+    Product product = new()
+        {
+            Id = 1,
+            Name = "Product 1",
+            IsActive = true,
+            prodProperties = new List<Product_Properties>() {
+                new Product_Properties { Id = 1, Key = "Color", Value = "Red" },
+                new Product_Properties { Id = 2, Key = "Size", Value = "20z" },
+                new Product_Properties { Id = 3, Key = "Flavor", Value = "Rose" }
+            }
+        };
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        ProductList.Add(new()
+            {
+                Id = 1,
+                Name = "Product 1",
+                IsActive = true,
+                Price = 5.32m,
+                prodProperties = new List<Product_Properties>() {
+                    new Product_Properties { Id = 1, Key = "Color", Value = "Red" },
+                    new Product_Properties { Id = 2, Key = "Size", Value = "20z" },
+                    new Product_Properties { Id = 3, Key = "Flavor", Value = "Rose" }
+                }
+            });
+
+        ProductList.Add(new()
+            {
+                Id = 2,
+                Name = "Product 2",
+                IsActive = false,
+                Price = 33.12m,
+                prodProperties = new List<Product_Properties>() {
+                    new Product_Properties { Id = 1, Key = "Color", Value = "Purple" },
+                    new Product_Properties { Id = 2, Key = "Size", Value = "30z" },
+                    new Product_Properties { Id = 3, Key = "Flavor", Value = "Lilly" }
+                }
+            });
+    }
+}

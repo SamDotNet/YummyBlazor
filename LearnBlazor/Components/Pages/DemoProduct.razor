@@ -8,8 +8,8 @@
 <div class="row">
     @foreach (var prod in ProductList)
     {
-        <IndividaulProduct prod="@prod" ProductList="ProductList" OnFavouriteUpdated="FavouriteCountChange"
-                           OnSelectedProdChange="UpdateSelectedProduct"></IndividaulProduct>
+        <_IndividaulProduct prod="@prod" ProductList="ProductList" OnFavouriteUpdated="FavouriteCountChange"
+                           OnSelectedProdChange="UpdateSelectedProduct"></_IndividaulProduct>
     }
     <br />
 </div>

@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\blazor+snippets\OLD Course .NET 6\Resources\Images\Other Images\" />
+  </ItemGroup>
+
 </Project>

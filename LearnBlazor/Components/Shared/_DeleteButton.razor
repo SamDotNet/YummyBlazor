@@ -1,0 +1,18 @@
+﻿
+    <input type="button" class="btn btn-danger" value="Delete - @Id" @onclick="(args)=>DeleteProduct(args,Id)" />
+
+    <br />
+ @*    @Name *@
+<br />
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    
+    [Parameter]
+    public EventCallback<int> OnRemoveProduct { get; set; }
+
+    protected void DeleteProduct(MouseEventArgs args, int Id)
+    {
+        OnRemoveProduct.InvokeAsync(Id);
+    }
+}

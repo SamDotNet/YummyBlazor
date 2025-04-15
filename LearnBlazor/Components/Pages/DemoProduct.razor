@@ -1,0 +1,97 @@
+﻿@page "/demoProduct"
+
+<h2>Demo Product</h2>
+
+<p>  Favourites Count - @favouriteCount</p>
+<p>  Selected Product - @selectedProd</p>
+
+<div class="row">
+    @foreach (var prod in ProductList)
+    {
+        <IndividaulProduct prod="@prod" ProductList="ProductList" OnFavouriteUpdated="FavouriteCountChange"
+                           OnSelectedProdChange="UpdateSelectedProduct"></IndividaulProduct>
+    }
+    <br />
+</div>
+<div class="row">
+    <div class="pt-4 col-4">
+        <input type="button" class="btn btn-success" value=" Counter ++ " @onclick="()=>IncrementCounter(5)" />
+        Count - @Count
+        <input type="button" class="btn btn-success" value="Counter --" @onclick="DecrementCounter" />
+    </div>
+</div>
+
+@code {
+
+    private int Count = 0;
+    private int favouriteCount = 0;
+    public string selectedProd = "";
+    private bool selectedProp;
+    List<Product> ProductList = new();
+
+    Product product = new()
+        {
+            Id = 1,
+            Name = "Product 1",
+            IsActive = true,
+            ProdProperties = new List<Product_Properties>() {
+                new Product_Properties { Id = 1, Key = "Color", Value = "Red" },
+                new Product_Properties { Id = 2, Key = "Size", Value = "20z" },
+                new Product_Properties { Id = 3, Key = "Flavor", Value = "Rose" }
+            }
+        };
+
+    protected void FavouriteCountChange(bool isSelected)
+    {
+        if (isSelected)
+            favouriteCount++;
+        else
+            favouriteCount--;
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        ProductList.Add(new()
+            {
+                Id = 1,
+                Name = "Product 1",
+                IsActive = true,
+                Price = 5.32m,
+                ProdProperties = new List<Product_Properties>() {
+                    new Product_Properties { Id = 1, Key = "Color", Value = "Red" },
+                    new Product_Properties { Id = 2, Key = "Size", Value = "20z" },
+                    new Product_Properties { Id = 3, Key = "Flavor", Value = "Rose" }
+                }
+            });
+
+        ProductList.Add(new()
+            {
+                Id = 2,
+                Name = "Product 2",
+                IsActive = false,
+                Price = 33.12m,
+                ProdProperties = new List<Product_Properties>() {
+                    new Product_Properties { Id = 1, Key = "Color", Value = "Purple" },
+                    new Product_Properties { Id = 2, Key = "Size", Value = "30z" },
+                    new Product_Properties { Id = 3, Key = "Flavor", Value = "Lilly" }
+                }
+            });
+    }
+
+    private void IncrementCounter(int number)
+    {
+        Count += number;
+    }
+
+    private void DecrementCounter()
+    {
+        Count--;
+    }
+
+    protected void UpdateSelectedProduct(string prodName)
+    {
+        selectedProd = prodName;
+    }
+}

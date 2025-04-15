@@ -2,7 +2,6 @@
 @using Models
 <div class="row">
 
-
     <div class="col-6 border p-3">
         <h3> Product Playground </h3>
         IsActive -
@@ -13,9 +12,9 @@
         <br />Enter Price -
         <input type="number" @bind-value="@product.Price" @bind-value:event="oninput"></input>
         <br />
-        Select proprty :
+        Select property :
         <select @bind="selectedProp">
-            @foreach (var prop in product.prodProperties)
+            @foreach (var prop in product.ProdProperties)
             {
                 <option value="@prop.Key">@prop.Key</option>
             }
@@ -32,7 +31,7 @@
         <br />
         Selected Prop : @selectedProp
         <br />
-        Selected Value : @product.prodProperties.FirstOrDefault(x => x.Key == selectedProp)?.Value
+        Selected Value : @product.ProdProperties.FirstOrDefault(x => x.Key == selectedProp)?.Value
         <br />
     </div>
 </div>
@@ -91,7 +90,7 @@
             Id = 1,
             Name = "Product 1",
             IsActive = true,
-            prodProperties = new List<Product_Properties>() {
+            ProdProperties = new List<Product_Properties>() {
                 new Product_Properties { Id = 1, Key = "Color", Value = "Red" },
                 new Product_Properties { Id = 2, Key = "Size", Value = "20z" },
                 new Product_Properties { Id = 3, Key = "Flavor", Value = "Rose" }
@@ -108,7 +107,7 @@
                 Name = "Product 1",
                 IsActive = true,
                 Price = 5.32m,
-                prodProperties = new List<Product_Properties>() {
+                ProdProperties = new List<Product_Properties>() {
                     new Product_Properties { Id = 1, Key = "Color", Value = "Red" },
                     new Product_Properties { Id = 2, Key = "Size", Value = "20z" },
                     new Product_Properties { Id = 3, Key = "Flavor", Value = "Rose" }
@@ -121,7 +120,7 @@
                 Name = "Product 2",
                 IsActive = false,
                 Price = 33.12m,
-                prodProperties = new List<Product_Properties>() {
+                ProdProperties = new List<Product_Properties>() {
                     new Product_Properties { Id = 1, Key = "Color", Value = "Purple" },
                     new Product_Properties { Id = 2, Key = "Size", Value = "30z" },
                     new Product_Properties { Id = 3, Key = "Flavor", Value = "Lilly" }
